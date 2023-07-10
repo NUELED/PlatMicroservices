@@ -10,18 +10,22 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
-if(builder.Build().Environment.IsProduction())
-{
+//if (builder.Build().Environment.IsProduction())
+//{
 
-  Console.WriteLine("--> Using SqlServer Db");
-  builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("PlatformsConn")));
-}
-else
-{
-  Console.WriteLine("--> Using InMem Db");
-  builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
-}
-builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
+//    Console.WriteLine("--> Using SqlServer Db");
+//    builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("PlatformsConn")));
+//}
+//else
+//{
+//    Console.WriteLine("--> Using InMem Db");
+//    builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
+//}
+
+
+builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("PlatCon")));   
+//builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));  
+builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();   
 builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -49,5 +53,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-PrepDb.PrepPopulation(app);
+//PrepDb.PrepPopulation(app, app.Environment.IsProduction());
+PrepDb.PrepPopulation(app/*, app.Environment.IsProduction()*/);
 app.Run();

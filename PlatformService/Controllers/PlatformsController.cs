@@ -92,5 +92,18 @@ namespace PlatformService.Controllers
             return Ok(platformReadDto);
 
         }
+
+        [HttpPost]
+        [Route("my_post")]
+        public async Task<ActionResult> Post(Platform platform)
+        {
+            if (platform == null)
+            {
+                return BadRequest();
+            }
+            _repository.CreatePlatform(platform);
+            _repository.SaveChanges();  
+            return Ok(platform);
+        }
     }
 }
