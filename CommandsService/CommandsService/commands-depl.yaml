@@ -27,7 +27,7 @@ spec:
   ports:
   - name: commandservice
     protocol: TCP
-    port: 80
+    port: 80docker build -t nueledem/CommandsService -f .\CommandsService\Dockerfile .
     targetPort: 80
   #- name: plafromgrpc
   #  protocol: TCP

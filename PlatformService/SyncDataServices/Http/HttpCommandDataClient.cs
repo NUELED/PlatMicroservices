@@ -28,6 +28,7 @@ namespace PlatformService.SyncDataServices.Http
                 "application/json");
 
             var response = await _httpClient.PostAsync($"{_configuration["CommandService"]}", httpContent);
+           // var response = await _httpClient.PostAsync("https://localhost:7297/api/c/Platforms/", httpContent);
 
             if(response.IsSuccessStatusCode)
             {

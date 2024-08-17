@@ -14,7 +14,10 @@ spec:
     spec:
       containers:
         - name: platformservice
-          image: nueledem/platformservice:latest
+          image: nueledem/platformservice:4.0
+          # env:
+          #   - name: ASPNETCORE_ENVIRONMENT
+          #     value: Development
 ---
 apiVersion: v1
 kind: Service
